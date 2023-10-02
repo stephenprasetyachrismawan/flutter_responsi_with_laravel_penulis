@@ -16,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Login (IrfanP)'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -65,8 +65,8 @@ class _LoginPageState extends State<LoginPage> {
       controller: _passwordTextboxController,
       validator: (value) {
         //jika karakter yang dimasukkan kurang dari 6 karakter
-        if (value!.isEmpty) {
-          return "Password harus diisi";
+        if (value!.length < 6) {
+          return "Password harus diisi minimal 6 karakter";
         }
         return null;
       },
