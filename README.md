@@ -8,3 +8,8 @@ UI TokoKita
 ![DetailProduk](DetailProduk.jpeg)
 ![UbahProduk](UbahProduk.jpeg)
 ![HapusProduk](HapusProduk.jpeg)
+
+# tugas-5
+Backend CI4 API
+
+![Database](database.png)
