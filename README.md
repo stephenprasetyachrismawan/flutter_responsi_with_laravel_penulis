@@ -1,15 +1,5 @@
-# tugas-4
-UI TokoKita
+GitHub : 
+(https://github.com/ahitabisma/responsi-mobile-api)
 
-![Registrasi](Registrasi.jpeg)
-![Login](Login.jpeg)
-![ListProduk](ListProduk.jpeg)
-![TambahProduk](TambahProduk.jpeg)
-![DetailProduk](DetailProduk.jpeg)
-![UbahProduk](UbahProduk.jpeg)
-![HapusProduk](HapusProduk.jpeg)
-
-# tugas-5
-Backend CI4 API
-
-![Database](database.png)
+Tutorial : 
+(https://dot-soda-451.notion.site/Laravel-API-11ca7ab02bae80158c63f88deb0d0557?pvs=25)
