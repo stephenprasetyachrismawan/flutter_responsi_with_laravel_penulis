@@ -1,20 +1,20 @@
 class ApiUrl {
-  static const String baseUrl = 'http://10.139.67.23:8080';
+  static const String baseUrl = 'http://103.196.155.42/api';
 
   static const String registrasi = baseUrl + '/registrasi';
   static const String login = baseUrl + '/login';
-  static const String listProduk = baseUrl + '/produk';
-  static const String createProduk = baseUrl + '/produk';
+  static const String listPenulis = baseUrl + '/buku/penulis';
+  static const String createPenulis = baseUrl + '/buku/penulis';
 
-  static String updateProduk(int id) {
-    return baseUrl + '/produk/' + id.toString();
+  static String updatePenulis(int id) {
+    return baseUrl + '/buku/penulis/' + id.toString() + '/update';
   }
 
-  static String showProduk(int id) {
-    return baseUrl + '/produk/' + id.toString();
+  static String showPenulis(int id) {
+    return baseUrl + '/buku/penulis/' + id.toString();
   }
 
-  static String deleteProduk(int id) {
-    return baseUrl + '/produk/' + id.toString();
+  static String deletePenulis(int id) {
+    return baseUrl + '/buku/penulis/' + id.toString() + '/delete';
   }
 }

@@ -1,40 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:tokokita/bloc/produk_bloc.dart';
-import 'package:tokokita/model/produk.dart';
-import 'package:tokokita/ui/produk_form.dart';
-import 'package:tokokita/ui/produk_page.dart';
+import 'package:tokokita/bloc/penulis_bloc.dart';
+import 'package:tokokita/model/penulis.dart';
+import 'package:tokokita/ui/penulis_form.dart';
+import 'package:tokokita/ui/penulis_page.dart';
 import 'package:tokokita/widget/warning_dialog.dart';
 
 // ignore: must_be_immutable
-class ProdukDetail extends StatefulWidget {
-  Produk? produk;
+class PenulisDetail extends StatefulWidget {
+  Penulis? penulis;
 
-  ProdukDetail({Key? key, this.produk}) : super(key: key);
+  PenulisDetail({Key? key, this.penulis}) : super(key: key);
 
   @override
-  _ProdukDetailState createState() => _ProdukDetailState();
+  _PenulisDetailState createState() => _PenulisDetailState();
 }
 
-class _ProdukDetailState extends State<ProdukDetail> {
+class _PenulisDetailState extends State<PenulisDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detail Produk'),
+        title: const Text('Detail Penulis'),
       ),
       body: Center(
         child: Column(
           children: [
             Text(
-              "Kode : ${widget.produk!.kodeProduk}",
+              "Nama : ${widget.penulis!.author_name}",
               style: const TextStyle(fontSize: 20.0),
             ),
             Text(
-              "Nama : ${widget.produk!.namaProduk}",
+              "Nationality : ${widget.penulis!.nationality}",
               style: const TextStyle(fontSize: 18.0),
             ),
             Text(
-              "Harga : Rp. ${widget.produk!.hargaProduk.toString()}",
+              "Birth Year : ${widget.penulis!.birth_year}",
               style: const TextStyle(fontSize: 18.0),
             ),
             _tombolHapusEdit()
@@ -55,8 +55,8 @@ class _ProdukDetailState extends State<ProdukDetail> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ProdukForm(
-                  produk: widget.produk!,
+                builder: (context) => PenulisForm(
+                  penulis: widget.penulis!,
                 ),
               ),
             );
@@ -79,10 +79,10 @@ class _ProdukDetailState extends State<ProdukDetail> {
         OutlinedButton(
           child: const Text("Ya"),
           onPressed: () {
-            ProdukBloc.deleteProduk(id: int.parse(widget.produk!.id!)).then(
+            PenulisBloc.deletePenulis(id: widget.penulis!.id!).then(
                 (value) => {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const ProdukPage()))
+                          builder: (context) => const PenulisPage()))
                     }, onError: (error) {
               showDialog(
                   context: context,

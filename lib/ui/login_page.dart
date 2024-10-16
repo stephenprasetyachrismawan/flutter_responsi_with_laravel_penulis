@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tokokita/bloc/login_bloc.dart';
 import 'package:tokokita/helpers/user_info.dart';
-import 'package:tokokita/ui/produk_page.dart';
+import 'package:tokokita/ui/penulis_page.dart';
 import 'package:tokokita/ui/registrasi_page.dart';
 import 'package:tokokita/widget/warning_dialog.dart';
 
@@ -78,7 +78,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   //Membuat Tombol Login
-  //Membuat Tombol Login
   Widget _buttonLogin() {
     return ElevatedButton(
         child: const Text("Login"),
@@ -100,10 +99,11 @@ class _LoginPageState extends State<LoginPage> {
             password: _passwordTextboxController.text)
         .then((value) async {
       if (value.code == 200) {
-        await UserInfo().setToken(value.token.toString());
-        await UserInfo().setUserID(int.parse(value.userID.toString()));
+        print(value.userID);
+        await UserInfo().setToken(value.token!);
+        await UserInfo().setUserID(value.userID!);
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const ProdukPage()));
+            MaterialPageRoute(builder: (context) => const PenulisPage()));
       } else {
         showDialog(
             context: context,

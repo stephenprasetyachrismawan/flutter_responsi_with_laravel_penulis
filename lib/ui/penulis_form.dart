@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:tokokita/bloc/produk_bloc.dart';
-import 'package:tokokita/model/produk.dart';
-import 'package:tokokita/ui/produk_page.dart';
+import 'package:tokokita/bloc/penulis_bloc.dart';
+import 'package:tokokita/model/penulis.dart';
+import 'package:tokokita/ui/penulis_page.dart';
 import 'package:tokokita/widget/warning_dialog.dart';
 
 // ignore: must_be_immutable
-class ProdukForm extends StatefulWidget {
-  Produk? produk;
-  ProdukForm({Key? key, this.produk}) : super(key: key);
+class PenulisForm extends StatefulWidget {
+  Penulis? penulis;
+  PenulisForm({Key? key, this.penulis}) : super(key: key);
   @override
-  _ProdukFormState createState() => _ProdukFormState();
+  _PenulisFormState createState() => _PenulisFormState();
 }
 
-class _ProdukFormState extends State<ProdukForm> {
+class _PenulisFormState extends State<PenulisForm> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
-  String judul = "TAMBAH PRODUK";
+  String judul = "TAMBAH PENULIS";
   String tombolSubmit = "SIMPAN";
-  final _kodeProdukTextboxController = TextEditingController();
-  final _namaProdukTextboxController = TextEditingController();
-  final _hargaProdukTextboxController = TextEditingController();
+  final _author_nameTextboxController = TextEditingController();
+  final _nationalityTextboxController = TextEditingController();
+  final _birth_yearTextboxController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -27,17 +27,17 @@ class _ProdukFormState extends State<ProdukForm> {
   }
 
   isUpdate() {
-    if (widget.produk != null) {
+    if (widget.penulis != null) {
       setState(() {
-        judul = "UBAH PRODUK";
+        judul = "UBAH PENULIS";
         tombolSubmit = "UBAH";
-        _kodeProdukTextboxController.text = widget.produk!.kodeProduk!;
-        _namaProdukTextboxController.text = widget.produk!.namaProduk!;
-        _hargaProdukTextboxController.text =
-            widget.produk!.hargaProduk.toString();
+        _author_nameTextboxController.text = widget.penulis!.author_name!;
+        _nationalityTextboxController.text = widget.penulis!.nationality!;
+        _birth_yearTextboxController.text =
+            widget.penulis!.birth_year.toString();
       });
     } else {
-      judul = "TAMBAH PRODUK";
+      judul = "TAMBAH PENULIS";
       tombolSubmit = "SIMPAN";
     }
   }
@@ -53,9 +53,9 @@ class _ProdukFormState extends State<ProdukForm> {
             key: _formKey,
             child: Column(
               children: [
-                _kodeProdukTextField(),
-                _namaProdukTextField(),
-                _hargaProdukTextField(),
+                _author_nameTextField(),
+                _nationalityTextField(),
+                _birth_yearTextField(),
                 _buttonSubmit()
               ],
             ),
@@ -66,14 +66,14 @@ class _ProdukFormState extends State<ProdukForm> {
   }
 
   //Membuat Textbox Kode Produk
-  Widget _kodeProdukTextField() {
+  Widget _author_nameTextField() {
     return TextFormField(
-      decoration: const InputDecoration(labelText: "Kode Produk"),
+      decoration: const InputDecoration(labelText: "Author Name"),
       keyboardType: TextInputType.text,
-      controller: _kodeProdukTextboxController,
+      controller: _author_nameTextboxController,
       validator: (value) {
         if (value!.isEmpty) {
-          return "Kode Produk harus diisi";
+          return "Author Name harus diisi";
         }
         return null;
       },
@@ -81,14 +81,14 @@ class _ProdukFormState extends State<ProdukForm> {
   }
 
   //Membuat Textbox Nama Produk
-  Widget _namaProdukTextField() {
+  Widget _nationalityTextField() {
     return TextFormField(
-      decoration: const InputDecoration(labelText: "Nama Produk"),
+      decoration: const InputDecoration(labelText: "Nationality"),
       keyboardType: TextInputType.text,
-      controller: _namaProdukTextboxController,
+      controller: _nationalityTextboxController,
       validator: (value) {
         if (value!.isEmpty) {
-          return "Nama Produk harus diisi";
+          return "Nationality harus diisi";
         }
         return null;
       },
@@ -96,14 +96,14 @@ class _ProdukFormState extends State<ProdukForm> {
   }
 
 //Membuat Textbox Harga Produk
-  Widget _hargaProdukTextField() {
+  Widget _birth_yearTextField() {
     return TextFormField(
-      decoration: const InputDecoration(labelText: "Harga"),
+      decoration: const InputDecoration(labelText: "Birth Year"),
       keyboardType: TextInputType.number,
-      controller: _hargaProdukTextboxController,
+      controller: _birth_yearTextboxController,
       validator: (value) {
         if (value!.isEmpty) {
-          return "Harga harus diisi";
+          return "Birth Year harus diisi";
         }
         return null;
       },
@@ -118,8 +118,8 @@ class _ProdukFormState extends State<ProdukForm> {
           var validate = _formKey.currentState!.validate();
           if (validate) {
             if (!_isLoading) {
-              if (widget.produk != null) {
-                //kondisi update produk
+              if (widget.penulis != null) {
+                //kondisi update penulis
                 ubah();
               } else {
                 //kondisi tambah produk
@@ -134,13 +134,14 @@ class _ProdukFormState extends State<ProdukForm> {
     setState(() {
       _isLoading = true;
     });
-    Produk createProduk = Produk(id: null);
-    createProduk.kodeProduk = _kodeProdukTextboxController.text;
-    createProduk.namaProduk = _namaProdukTextboxController.text;
-    createProduk.hargaProduk = int.parse(_hargaProdukTextboxController.text);
-    ProdukBloc.addProduk(produk: createProduk).then((value) {
+    Penulis createPenulis = Penulis(id: null);
+    createPenulis.author_name = _author_nameTextboxController.text;
+    createPenulis.nationality = _nationalityTextboxController.text;
+    createPenulis.birth_year = int.parse(_birth_yearTextboxController.text);
+    // createPenulis.birth_year = _birth_yearTextboxController.text; --> kode yang salah
+    PenulisBloc.addPenulis(penulis: createPenulis).then((value) {
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => const ProdukPage()));
+          builder: (BuildContext context) => const PenulisPage()));
     }, onError: (error) {
       showDialog(
           context: context,
@@ -157,13 +158,14 @@ class _ProdukFormState extends State<ProdukForm> {
     setState(() {
       _isLoading = true;
     });
-    Produk updateProduk = Produk(id: widget.produk!.id!);
-    updateProduk.kodeProduk = _kodeProdukTextboxController.text;
-    updateProduk.namaProduk = _namaProdukTextboxController.text;
-    updateProduk.hargaProduk = int.parse(_hargaProdukTextboxController.text);
-    ProdukBloc.updateProduk(produk: updateProduk).then((value) {
+    Penulis updatePenulis = Penulis(id: widget.penulis!.id!);
+    updatePenulis.author_name = _author_nameTextboxController.text;
+    updatePenulis.nationality = _nationalityTextboxController.text;
+    updatePenulis.birth_year = int.parse(_birth_yearTextboxController.text);
+    // updatePenulis.birth_year = _birth_yearTextboxController.text; --> kode yang salah
+    PenulisBloc.updatePenulis(penulis: updatePenulis).then((value) {
       Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) => const ProdukPage()));
+          builder: (BuildContext context) => const PenulisPage()));
     }, onError: (error) {
       showDialog(
           context: context,
